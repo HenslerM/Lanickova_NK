@@ -34,7 +34,7 @@ library(ggalluvial)
 #Low-quality cells were excluded from each sample individually based on the following thresholds: number of detected features (nFeature) ranging between 200 and 700, and mitochondrial gene content exceeding 15% (see method in manuscript) 
 #genes that were not common to both datasets were removed from the datasets
 #The ovarian and lung datasets were merged and further analyzed
-OV.LUNG=merge(OV, LUNG)
+load("OV.LUNG.rda",verbose=T)
 
 
 OV.LUNG<- NormalizeData(OV.LUNG)
@@ -75,7 +75,7 @@ OV.LUNG <- AddMetaData( object=OV.LUNG,metadata=make.names(sub( " [(].*$","",pre
 
 #Selection of Natural killer subset
 Idents(OV.LUNG)="BlueprintEncodeData"
-nk.subset=subset(OV.LUNG,subset = NK.cells == "NK.cells")
+nk.subset=subset(OV.LUNG,idents= "NK.cells")
 
 # pseudobulk DE analysis
 #NK1 and NK2 labels were added to the metadata, column was named as "Samples" 
